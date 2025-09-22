@@ -60,11 +60,12 @@ nav {
     text-decoration: none;
     display: flex;
     align-items: center;
+    
 }
 
-.logo i {
-    color: var(--gold-accent);
-    margin-right: 10px;
+.logo img {
+   width: 40px;
+    height: 40px;
 }
 
 .nav-links {
@@ -123,6 +124,7 @@ nav {
 .dropbtn i {
     margin-left: 5px;
     font-size: 12px;
+    transition: transform 0.3s ease;
 }
 
 .dropdown-content {
@@ -1354,6 +1356,8 @@ footer {
     }
 }
 
+/* Add these styles to your CSS file, replacing the existing mobile dropdown styles */
+
 @media (max-width: 768px) {
     .nav-links {
         position: fixed;
@@ -1364,10 +1368,12 @@ footer {
         background-color: var(--white);
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
+        padding-top: 80px;
         transition: var(--transition);
         box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
         z-index: 1000;
+        overflow-y: auto; /* Add scroll for long menus */
     }
 
     .nav-links.active {
@@ -1375,21 +1381,63 @@ footer {
     }
 
     .nav-links li {
-        margin: 15px 0;
+        margin: 10px 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 12px 0;
+        font-size: 16px;
+    }
+
+    /* Mobile dropdown styles */
+    .dropdown {
+        width: 100%;
     }
 
     .dropdown-content {
         position: static;
         display: none;
         box-shadow: none;
-        background-color: var(--primary-bg);
+        background-color: rgba(207, 164, 90, 0.1); /* Light gold background */
         width: 100%;
-        margin-top: 10px;
-        border-radius: 4px;
+        margin-top: 0;
+        border-radius: 0;
+        text-align: center;
+        border-top: 1px solid rgba(207, 164, 90, 0.3); /* Gold border */
+        border-bottom: 1px solid rgba(207, 164, 90, 0.3); /* Gold border */
+        padding: 10px 0;
     }
 
     .dropdown.active .dropdown-content {
         display: block;
+    }
+
+    .dropdown-content a {
+        padding: 10px 0;
+        color: var(--wood-brown); /* Darker text for contrast */
+        font-weight: 500;
+    }
+
+    .dropdown-content a:hover {
+        background-color: rgba(207, 164, 90, 0.2); /* Light gold on hover */
+        color: var(--gold-accent);
+    }
+
+    .dropbtn {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .dropbtn i {
+        margin-left: 8px;
+        transition: transform 0.3s ease;
+    }
+
+    .dropdown.active .dropbtn i {
+        transform: rotate(180deg);
     }
 
     .mobile-menu-btn {

@@ -18,6 +18,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (closeMenuBtn) {
             closeMenuBtn.style.display = 'none';
         }
+        
+        // Close any open dropdowns when closing the menu
+        document.querySelectorAll('.dropdown.active').forEach(dropdown => {
+            dropdown.classList.remove('active');
+        });
     }
     
     if (mobileMenuBtn) {
@@ -28,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         closeMenuBtn.addEventListener('click', closeMobileMenu);
     }
 
-    // Dropdown Menu for Mobile
+    // Dropdown Menu - Desktop and Mobile
     const dropdowns = document.querySelectorAll('.dropdown');
     
     dropdowns.forEach(dropdown => {
@@ -36,7 +41,12 @@ document.addEventListener('DOMContentLoaded', function() {
         
         if (dropbtn) {
             dropbtn.addEventListener('click', function(e) {
-                if (window.innerWidth <= 768) {
+                // Handle dropdown differently based on screen size
+                if (window.innerWidth > 768) {
+                    // Desktop behavior - let the hover effect work
+                    return;
+                } else {
+                    // Mobile behavior - prevent default and toggle dropdown
                     e.preventDefault();
                     
                     // Close other dropdowns
@@ -53,13 +63,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Close mobile menu when clicking on a link
+    // Close mobile menu when clicking on a link (except dropdown toggles)
     const mobileNavLinks = document.querySelectorAll('.nav-links a');
     
     mobileNavLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             // Don't close menu if it's a dropdown toggle
-            if (!link.classList.contains('dropbtn') || window.innerWidth > 768) {
+            if (!link.classList.contains('dropbtn')) {
                 closeMobileMenu();
             }
         });
